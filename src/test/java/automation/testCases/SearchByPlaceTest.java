@@ -23,7 +23,7 @@ public class SearchByPlaceTest {
 	DirectionsPage directionsPage;
 	
 	@Before
-	public void setup(){		
+	public void setup(){
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("https://www.google.com/maps");
@@ -45,7 +45,7 @@ public class SearchByPlaceTest {
 	}
 	
 	@After
-	public void fechaBrowser() {
+	public void closeBrowser() {
 		driver.quit();
 	}
 
