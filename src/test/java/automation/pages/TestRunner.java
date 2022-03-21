@@ -1,4 +1,4 @@
-package automation.testCases;
+package automation.pages;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,11 +11,8 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import automation.pages.InitialSearchPage;
-import automation.pages.DirectionsPage;
-import automation.pages.ResultDetailPage;
 
-public class SearchByPlaceTest {
+public class TestRunner {
 	
 	WebDriver driver;
 	InitialSearchPage initialSearchPage;
@@ -31,15 +28,27 @@ public class SearchByPlaceTest {
 	}
 
 	@Test
+	//RUN AS JUnit
 	public void search_by_Dublin() {
 		String placeToSearch = "Dublin";
 		
+		initialSearchPage(placeToSearch);
+		resultDetailPage(placeToSearch);
+		directionsPage(placeToSearch);
+		
+	}
+	
+	public void initialSearchPage(String placeToSearch) {	
 		initialSearchPage = new InitialSearchPage(driver);
 		initialSearchPage.mapsInitialSearch(placeToSearch);
-		
+	}
+	
+	public void resultDetailPage(String placeToSearch) {
 		resultDetailPage = new ResultDetailPage(driver);
 		assertEquals(resultDetailPage.getPlaceTitle(), placeToSearch);
-
+	}
+	
+	public void directionsPage(String placeToSearch) {
 		directionsPage = new DirectionsPage(driver);
 		assertTrue((directionsPage.directionsPage()).contains(placeToSearch));
 	}
@@ -48,5 +57,4 @@ public class SearchByPlaceTest {
 	public void closeBrowser() {
 		driver.quit();
 	}
-
 }
